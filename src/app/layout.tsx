@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Savor — Restaurant marketing made simple",
+  title: "Dishboost— Restaurant marketing made simple",
   description: "Turn great food photos into ready-to-share restaurant marketing.",
 };
 
