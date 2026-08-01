@@ -23,9 +23,9 @@ export async function POST(req: Request) {
     max_tokens: 600,
   });
 
-  const generatedContent = completion.choices[0].message.content;
+  const aiResponse = completion.choices[0].message.content;
 
   return Response.json({
-    generated: generatedContent,
+    generatedCaption : aiResponse,
   });
 }

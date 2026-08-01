@@ -41,19 +41,18 @@ export default function Home() {
   );
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generated, setGenerated] = useState(true);
   const [copied, setCopied] = useState<string | null>(null);
+  const [generatedContent, setGeneratedContent] = useState<string | null>(null);
 
   const content = useMemo(() => {
-    const venue = restaurant.trim() || "your restaurant";
-    const moment = details.trim() || "our newest seasonal special";
+    
     return {
-      instagram: `Golden hour, handmade pasta, and a little bit of magic. ✨\n\nMeet our new saffron pappardelle — silky ribbons, slow-braised short rib, and just the right finish of pecorino. ${moment}.\n\nJoin us at ${venue}. Reservations are open — link in bio.\n\n#LunaOsteria #BrooklynEats #PastaLovers #ItalianFood #NYCRestaurants`,
-      facebook: `There’s something special about gathering around a table made for lingering.\n\nThis week at ${venue}, we’re serving our new saffron pappardelle with slow-braised short rib, pecorino, and a generous pour of care. ${moment}.\n\nBring your favourite people, settle in, and let us take care of dinner. Book your table today.`,
-      google: `Now serving at ${venue}: saffron pappardelle with slow-braised short rib and pecorino. A comforting new addition to our modern Italian menu in Brooklyn. ${moment}. Reserve your table or stop by to enjoy it while it’s here.`,
-      email: `Subject: Something delicious is waiting at ${venue}\n\nA new favourite has arrived.\n\nOur saffron pappardelle is made for late summer evenings — silky handmade pasta, slow-braised short rib, and pecorino to finish. ${moment}.\n\nMake a reservation and come taste what we’ve been working on.`,
+      instagram: generatedContent,
+      facebook: `bla`,
+      google: ` bla`,
+      email: `bla`,
     };
-  }, [restaurant, details]);
+  }, [generatedContent]);
 
   function handleImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -75,7 +74,7 @@ export default function Home() {
 
     const result = await res.json();
 
-    setGenerated(result.generated);
+    setGeneratedContent(result.generatedCaption);
     setIsGenerating(false);
   }
 
@@ -257,7 +256,7 @@ export default function Home() {
                 All platforms <Icon name="chevron" className="size-4" />
               </button>
             </div>
-            {generated ? (
+            {generatedContent ? (
               <div className="grid gap-3">
                 {(
                   Object.keys(platformStyles) as Array<
