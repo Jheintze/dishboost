@@ -1,24 +1,31 @@
+import OpenAI from "openai";
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(req: Request) {
-    const { restaurant, description, details } = await req.json();
+  const { restaurant, description, details } = await req.json();
 
-    
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: `Generate a marketing content for ${restaurant}, ${description}, ${details}` }]
-        }),
-    });
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content: "You are a restaurant marketing assistant. Write engaging social media content.",
+      },
+      {
+        role: "user",
+        content: `Restaurant: ${restaurant}, Description: ${description}, Details: ${details}`,
+      },
+    ],
+    temperature: 0.5,
+    max_tokens: 600,
+  });
 
-    const data = await response.json();
+  const generatedContent = completion.choices[0].message.content;
 
-    return Response.json({
-        message: data.choices[0].message.content
-    });
-} 
+  return Response.json({
+    generated: generatedContent,
+  });
+}
