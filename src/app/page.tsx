@@ -23,36 +23,33 @@ const platformStyles = {
     color: "bg-[#f4eee3] text-[#987535]",
     meta: "Local update",
   },
-  email: {
-    label: "Email",
-    icon: "mail" as IconName,
-    color: "bg-[#e9f0ec] text-[#39765c]",
-    meta: "Newsletter copy",
-  },
+  // email: {
+  //   label: "Email",
+  //   icon: "mail" as IconName,
+  //   color: "bg-[#e9f0ec] text-[#39765c]",
+  //   meta: "Newsletter copy",
+  // },
+};
+
+type GeneratedContent = {
+  instagram: { post: string };
+  facebook: { post: string };
+  google: { post: string };
 };
 
 export default function Home() {
-  const [restaurant, setRestaurant] = useState("Luna Osteria");
+  const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState(
-    "Modern Italian dining in the heart of Brooklyn",
+    "",
   );
   const [details, setDetails] = useState(
-    "Summer menu launch · Available this weekend",
+    "",
   );
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
-  const [generatedContent, setGeneratedContent] = useState<string | null>(null);
-
-  const content = useMemo(() => {
-    
-    return {
-      instagram: generatedContent,
-      facebook: `bla`,
-      google: ` bla`,
-      email: `bla`,
-    };
-  }, [generatedContent]);
+  const [generatedContent, setGeneratedContent] =
+    useState<GeneratedContent | null>(null);
 
   function handleImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -158,7 +155,7 @@ export default function Home() {
               </label>
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
-                  A little about your place
+                  A little bit about your place
                 </span>
                 <input
                   value={description}
@@ -286,7 +283,7 @@ export default function Home() {
                               </p>
                             </div>
                             <button
-                              onClick={() => copyContent(key, content[key])}
+                              onClick={() => copyContent(key, generatedContent[key].post)}
                               className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f] transition hover:bg-[#f6f8f5]"
                             >
                               {copied === key ? (
@@ -306,7 +303,7 @@ export default function Home() {
                             </button>
                           </div>
                           <p className="mt-3 whitespace-pre-line text-[13px] leading-[1.55] text-[#556159] sm:text-sm">
-                            {content[key]}
+                            {generatedContent[key].post}
                           </p>
                         </div>
                       </div>
