@@ -36,13 +36,25 @@ export default function Home() {
     if (file) setImage(URL.createObjectURL(file));
   }
 
-  function generate() {
-    setIsGenerating(true);
-    window.setTimeout(() => {
-      setGenerated(true);
-      setIsGenerating(false);
-    }, 650);
-  }
+  async function handleGenerate() {
+
+  setIsGenerating(true)
+
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      restaurant,
+      description,
+      details,
+    }),
+  });
+
+  const result = await res.json();
+
+  setGenerated(result.generated);
+  setIsGenerating(false);
+}
 
   async function copyContent(key: string, text: string) {
     await navigator.clipboard.writeText(text);
@@ -88,7 +100,7 @@ export default function Home() {
               </div>
 
               <label className="block"><span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#304038]">Promotion or event details <span className="font-normal text-[#9ba39e]">(optional)</span></span><textarea value={details} onChange={(e) => setDetails(e.target.value)} rows={3} className="w-full resize-none rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 py-3 text-[15px] leading-6 outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]" placeholder="e.g. Happy hour, new menu, live music Friday" /></label>
-              <button onClick={generate} disabled={isGenerating} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#234d3f] text-sm font-semibold text-white shadow-[0_7px_15px_rgba(35,77,63,0.18)] transition hover:bg-[#1c4034] disabled:cursor-wait disabled:opacity-80"><Icon name="sparkle" className="size-4 text-[#f9cd74]" />{isGenerating ? "Creating your content…" : "Create marketing content"}<Icon name="arrow" className="size-4" /></button>
+              <button onClick={handleGenerate} disabled={isGenerating} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#234d3f] text-sm font-semibold text-white shadow-[0_7px_15px_rgba(35,77,63,0.18)] transition hover:bg-[#1c4034] disabled:cursor-wait disabled:opacity-80"><Icon name="sparkle" className="size-4 text-[#f9cd74]" />{isGenerating ? "Creating your content…" : "Create marketing content"}<Icon name="arrow" className="size-4" /></button>
             </div>
           </section>
 
