@@ -39,12 +39,8 @@ type GeneratedContent = {
 
 export default function Home() {
   const [restaurant, setRestaurant] = useState("");
-  const [description, setDescription] = useState(
-    "",
-  );
-  const [details, setDetails] = useState(
-    "",
-  );
+  const [description, setDescription] = useState("");
+  const [details, setDetails] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
@@ -83,6 +79,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#fbfaf7] text-[#23302a]">
+      {/* ================= HEADER / NAVBAR ================= */}
       <header className="border-b border-[#e8e5dd] bg-[#fcfbf8]/95 px-5 py-4 backdrop-blur sm:px-8">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between">
           <a
@@ -97,6 +94,8 @@ export default function Home() {
               Dishboost
             </span>
           </a>
+
+          {/* Account / profile button */}
           <button
             className="flex size-9 items-center justify-center rounded-full border border-[#e2e2dc] bg-white text-[#516059]"
             aria-label="Open account menu"
@@ -106,46 +105,58 @@ export default function Home() {
         </div>
       </header>
 
+      {/* ================= HERO SECTION ================= */}
       <section className="mx-auto max-w-[1440px] px-5 pb-16 pt-11 sm:px-8 lg:pt-16">
+        {/* Hero headline and introduction */}
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#e6dfd0] bg-[#f8f3e9] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#8b6b2f]">
             <span className="size-1.5 rounded-full bg-[#cf9e45]" /> Your
             marketing prep, simplified
           </p>
+
           <h1 className="font-serif text-4xl font-semibold leading-[1.04] tracking-[-0.055em] text-[#1e3029] sm:text-5xl lg:text-[58px]">
             Make your next post
             <br className="hidden sm:block" /> the easiest part of service.
           </h1>
+
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-7 text-[#68736d] sm:text-base">
             Turn one great food photo into thoughtful, on-brand marketing for
             every channel — ready in a few clicks.
           </p>
         </div>
 
+        {/* ================= MAIN GENERATOR AREA ================= */}
         <div
           id="generator"
           className="mt-11 grid gap-7 lg:grid-cols-[minmax(0,0.82fr)_minmax(500px,1.18fr)] lg:items-start"
         >
+          {/* ================= LEFT COLUMN: INPUT FORM ================= */}
           <section className="rounded-[24px] border border-[#e5e3dc] bg-white p-5 shadow-[0_2px_2px_rgba(26,39,33,0.02),0_14px_35px_rgba(26,39,33,0.045)] sm:p-7">
+            {/* Form title */}
             <div className="flex items-start justify-between border-b border-[#eeece7] pb-5">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#a27735]">
                   New creation
                 </p>
+
                 <h2 className="mt-1 font-serif text-2xl font-semibold tracking-[-0.035em] text-[#20312a]">
                   What are we sharing?
                 </h2>
               </div>
+
               <span className="flex size-9 items-center justify-center rounded-full bg-[#f4f0e7] text-[#9f783b]">
                 <Icon name="wand" className="size-4" />
               </span>
             </div>
 
+            {/* Input fields */}
             <div className="mt-6 space-y-5">
+              {/* Restaurant name */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
                   Restaurant name
                 </span>
+
                 <input
                   value={restaurant}
                   onChange={(e) => setRestaurant(e.target.value)}
@@ -153,10 +164,13 @@ export default function Home() {
                   placeholder="e.g. Luna Osteria"
                 />
               </label>
+
+              {/* Restaurant description */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
                   A little bit about your place
                 </span>
+
                 <input
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -164,16 +178,19 @@ export default function Home() {
                   placeholder="Your cuisine, neighborhood, or vibe"
                 />
               </label>
-
+              {/* ================= IMAGE UPLOAD ================= */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm font-semibold text-[#304038]">
                     Add a food photo
                   </span>
+
                   <span className="text-xs text-[#8c9690]">
                     JPG, PNG · up to 10 MB
                   </span>
                 </div>
+
+                {/* Upload area / image preview */}
                 <label className="group relative flex min-h-40 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-dashed border-[#c8d1ca] bg-[#fafbf9] transition hover:border-[#6e8b7b] hover:bg-[#f6faf7]">
                   <input
                     type="file"
@@ -181,8 +198,10 @@ export default function Home() {
                     onChange={handleImage}
                     className="sr-only"
                   />
+
                   {image ? (
                     <>
+                      {/* Uploaded image preview */}
                       <Image
                         src={image}
                         alt="Uploaded food"
@@ -191,19 +210,23 @@ export default function Home() {
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                       />
+
                       <span className="relative rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#315543] shadow-sm">
                         Replace photo
                       </span>
                     </>
                   ) : (
+                    /* Empty upload state */
                     <span className="flex flex-col items-center text-center">
                       <span className="mb-3 flex size-10 items-center justify-center rounded-full bg-[#e8f0eb] text-[#477461]">
                         <Icon name="image" className="size-5" />
                       </span>
+
                       <span className="text-sm font-semibold text-[#34453c]">
                         Drop a photo here or{" "}
                         <span className="text-[#42745d]">browse files</span>
                       </span>
+
                       <span className="mt-1 text-xs text-[#8c9690]">
                         The better the photo, the better the story.
                       </span>
@@ -212,11 +235,13 @@ export default function Home() {
                 </label>
               </div>
 
+              {/* Promotion / event details */}
               <label className="block">
                 <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#304038]">
                   Promotion or event details{" "}
                   <span className="font-normal text-[#9ba39e]">(optional)</span>
                 </span>
+
                 <textarea
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
@@ -225,34 +250,45 @@ export default function Home() {
                   placeholder="e.g. Happy hour, new menu, live music Friday"
                 />
               </label>
+
+              {/* Generate content button */}
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
                 className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#234d3f] text-sm font-semibold text-white shadow-[0_7px_15px_rgba(35,77,63,0.18)] transition hover:bg-[#1c4034] disabled:cursor-wait disabled:opacity-80"
               >
                 <Icon name="sparkle" className="size-4 text-[#f9cd74]" />
+
                 {isGenerating
                   ? "Creating your content…"
                   : "Create marketing content"}
+
                 <Icon name="arrow" className="size-4" />
               </button>
             </div>
           </section>
 
+          {/* ================= RIGHT COLUMN: GENERATED CONTENT ================= */}
           <section className="rounded-[24px] border border-[#e5e3dc] bg-[#f5f4f0] p-4 shadow-[0_2px_2px_rgba(26,39,33,0.02),0_14px_35px_rgba(26,39,33,0.04)] sm:p-5">
+            {/* Generated content header */}
             <div className="mb-4 flex items-center justify-between px-1">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#8a8479]">
                   Ready to share
                 </p>
+
                 <h2 className="mt-1 font-serif text-2xl font-semibold tracking-[-0.035em] text-[#20312a]">
                   Your content kit
                 </h2>
               </div>
+
+              {/* Platform filter button */}
               <button className="flex items-center gap-1 text-sm font-semibold text-[#56655e] transition hover:text-[#2d493b]">
                 All platforms <Icon name="chevron" className="size-4" />
               </button>
             </div>
+
+            {/* ================= GENERATED PLATFORM CARDS ================= */}
             {generatedContent ? (
               <div className="grid gap-3">
                 {(
@@ -261,33 +297,50 @@ export default function Home() {
                   >
                 ).map((key) => {
                   const platform = platformStyles[key];
+
                   return (
                     <article
                       key={key}
                       className="rounded-2xl border border-[#e6e4df] bg-white p-4 transition hover:border-[#d6d9d3] sm:p-5"
                     >
+                      {/* Platform header */}
                       <div className="flex items-start gap-3">
                         <span
                           className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${platform.color}`}
                         >
                           <Icon name={platform.icon} className="size-[18px]" />
                         </span>
+
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-3">
                             <div>
                               <h3 className="text-sm font-bold text-[#263630]">
                                 {platform.label}
                               </h3>
+
                               <p className="mt-0.5 text-xs text-[#909891]">
                                 {platform.meta}
                               </p>
                             </div>
+
+                            {/* Copy button */}
                             <button
-                              onClick={() => copyContent(key, generatedContent[key].post)}
+                              onClick={() =>
+                                copyContent(key, generatedContent[key].post)
+                              }
+                              className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f] transition hover:bg-[#f6f8f5]"
+                            >
+                              ...
+                            </button>
+                            <button
+                              onClick={() =>
+                                copyContent(key, generatedContent[key].post)
+                              }
                               className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f] transition hover:bg-[#f6f8f5]"
                             >
                               {copied === key ? (
                                 <>
+                                  {/* Copied state */}
                                   <Icon
                                     name="check"
                                     className="size-3.5 text-[#418060]"
@@ -296,12 +349,21 @@ export default function Home() {
                                 </>
                               ) : (
                                 <>
+                                  {/* Default copy state */}
                                   <Icon name="copy" className="size-3.5" />
                                   Copy
                                 </>
                               )}
                             </button>
                           </div>
+
+                          {/* Generated post content */}
+                          {image && (
+                            <img
+                              src={image}
+                              className="h-64 w-full rounded-lg object-cover"
+                            />
+                          )}
                           <p className="mt-3 whitespace-pre-line text-[13px] leading-[1.55] text-[#556159] sm:text-sm">
                             {generatedContent[key].post}
                           </p>
@@ -312,13 +374,18 @@ export default function Home() {
                 })}
               </div>
             ) : (
+              /* ================= EMPTY STATE ================= */
               <div className="flex min-h-96 flex-col items-center justify-center rounded-2xl border border-dashed border-[#d7d7d0] bg-white px-8 text-center">
+                {/* Empty state icon */}
                 <span className="flex size-11 items-center justify-center rounded-full bg-[#f5f0e7] text-[#9c773a]">
                   <Icon name="sparkle" className="size-5" />
                 </span>
+
+                {/* Empty state message */}
                 <h3 className="mt-4 font-serif text-xl font-semibold text-[#273830]">
                   Your content will appear here
                 </h3>
+
                 <p className="mt-2 max-w-xs text-sm leading-6 text-[#818a84]">
                   Add a few details about your dish, then we’ll create a
                   tailored kit for every channel.
@@ -328,9 +395,12 @@ export default function Home() {
           </section>
         </div>
       </section>
+
+      {/* ================= FOOTER ================= */}
       <footer className="border-t border-[#e8e5dd] px-5 py-5 sm:px-8">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between text-xs text-[#89918c]">
           <span>© {new Date().getFullYear()} Dishboost</span>
+
           <span className="hidden sm:block">
             Focus on cooking, we'll handle the rest.
           </span>
