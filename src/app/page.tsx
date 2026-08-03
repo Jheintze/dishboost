@@ -182,7 +182,7 @@ export default function Home() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm font-semibold text-[#304038]">
-                    Add a food photo
+                    Add a food photo ( optional )
                   </span>
 
                   <span className="text-xs text-[#8c9690]">
@@ -290,7 +290,7 @@ export default function Home() {
 
             {/* ================= GENERATED PLATFORM CARDS ================= */}
             {generatedContent ? (
-              <div className="grid gap-3">
+              <div className="grid max-w-2xl gap-4">
                 {(
                   Object.keys(platformStyles) as Array<
                     keyof typeof platformStyles
@@ -301,72 +301,107 @@ export default function Home() {
                   return (
                     <article
                       key={key}
-                      className="rounded-2xl border border-[#e6e4df] bg-white p-4 transition hover:border-[#d6d9d3] sm:p-5"
+                      className="h-fit overflow-hidden rounded-2xl border border-[#e6e4df] bg-white"
                     >
                       {/* Platform header */}
-                      <div className="flex items-start gap-3">
-                        <span
-                          className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${platform.color}`}
-                        >
-                          <Icon name={platform.icon} className="size-[18px]" />
-                        </span>
+                      <div className="flex items-center justify-between px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`flex size-9 items-center justify-center rounded-full ${platform.color}`}
+                          >
+                            <Icon
+                              name={platform.icon}
+                              className="size-[18px]"
+                            />
+                          </span>
 
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center justify-between gap-3">
-                            <div>
-                              <h3 className="text-sm font-bold text-[#263630]">
-                                {platform.label}
-                              </h3>
-
-                              <p className="mt-0.5 text-xs text-[#909891]">
-                                {platform.meta}
-                              </p>
-                            </div>
-
-                            {/* Copy button */}
-                            <button
-                              onClick={() =>
-                                copyContent(key, generatedContent[key].post)
-                              }
-                              className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f] transition hover:bg-[#f6f8f5]"
-                            >
-                              ...
-                            </button>
-                            <button
-                              onClick={() =>
-                                copyContent(key, generatedContent[key].post)
-                              }
-                              className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f] transition hover:bg-[#f6f8f5]"
-                            >
-                              {copied === key ? (
-                                <>
-                                  {/* Copied state */}
-                                  <Icon
-                                    name="check"
-                                    className="size-3.5 text-[#418060]"
-                                  />
-                                  Copied
-                                </>
-                              ) : (
-                                <>
-                                  {/* Default copy state */}
-                                  <Icon name="copy" className="size-3.5" />
-                                  Copy
-                                </>
-                              )}
-                            </button>
+                          <div>
+                            <h3 className="text-sm font-bold text-[#263630]">
+                              {platform.label}
+                            </h3>
+                            <p className="text-xs text-[#909891]">
+                              {platform.meta}
+                            </p>
                           </div>
+                        </div>
 
-                          {/* Generated post content */}
+                        <button
+                          onClick={() =>
+                            copyContent(key, generatedContent[key].post)
+                          }
+                          className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f]"
+                        >
+                          {copied === key ? (
+                            <>
+                              <Icon
+                                name="check"
+                                className="size-3.5 text-[#418060]"
+                              />
+                              Copied
+                            </>
+                          ) : (
+                            <>
+                              <Icon name="copy" className="size-3.5" />
+                              Copy
+                            </>
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Social preview */}
+                      <div className="border-t border-[#f0efeb] p-4">
+                        <div className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white">
                           {image && (
                             <img
                               src={image}
-                              className="h-64 w-full rounded-lg object-cover"
+                              className={
+                                key === "google"
+                                  ? "h-48 w-full object-cover"
+                                  : "aspect-square w-full object-cover"
+                              }
                             />
                           )}
-                          <p className="mt-3 whitespace-pre-line text-[13px] leading-[1.55] text-[#556159] sm:text-sm">
-                            {generatedContent[key].post}
-                          </p>
+
+                          {/* Instagram */}
+                          {key === "instagram" && (
+                            <>
+                              <div className="flex gap-4 px-4 pt-3 text-lg text-[#59665f]">
+                                ♡ 💬 ↗
+                              </div>
+
+                              <p className="px-4 pb-4 pt-2 line-clamp-6 whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
+                                {generatedContent[key].post}
+                              </p>
+                            </>
+                          )}
+
+                          {/* Facebook */}
+                          {key === "facebook" && (
+                            <>
+                              <div className="flex justify-between border-t border-[#f0efeb] px-4 py-3 text-xs font-medium text-[#59665f]">
+                                <span>👍 Like</span>
+                                <span>💬 Comment</span>
+                                <span>↗ Share</span>
+                              </div>
+
+                              <p className="px-4 pb-4 text-sm leading-relaxed text-[#37443c] line-clamp-6 whitespace-pre-line">
+                                {generatedContent[key].post}
+                              </p>
+                            </>
+                          )}
+
+                          {/* Google Business */}
+                          {key === "google" && (
+                            <>
+                              <p className="px-4 pt-4 text-xs font-semibold text-[#909891]">
+                                Latest update
+                              </p>
+
+                              <p className="px-4 pb-4 pt-2 line-clamp-6 whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
+                                {generatedContent[key].post}
+                              </p>
+                            </>
+                          )}
                         </div>
                       </div>
                     </article>
