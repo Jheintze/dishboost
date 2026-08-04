@@ -354,26 +354,15 @@ export default function Home() {
                       {/* Social preview */}
                       <div className="border-t border-[#f0efeb] p-4">
                         <div className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white">
-                          {image && (
-                            <img
-                              src={image}
-                              className={
-                                key === "google"
-                                  ? "h-48 w-full object-cover"
-                                  : "aspect-square w-full object-cover"
-                              }
-                            />
-                          )}
-
-                          {/* Instagram */}
                           {key === "instagram" && (
                             <InstagramPreview
+                              restaurant={restaurant}
+                              description={description}
                               image={image}
                               post={generatedContent[key].post}
                             />
                           )}
 
-                          {/* Facebook */}
                           {key === "facebook" && (
                             <FacebookPreview
                               image={image}
@@ -381,7 +370,6 @@ export default function Home() {
                             />
                           )}
 
-                          {/* Google Business */}
                           {key === "google" && (
                             <GooglePreview
                               image={image}
