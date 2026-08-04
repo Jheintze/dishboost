@@ -1,8 +1,11 @@
 "use client";
 
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Icon, { type IconName } from "./components/icons";
+import { InstagramPreview } from "./components/previews/InstagramPreview";
+import { FacebookPreview } from "./components/previews/FacebookPreview";
+import { GooglePreview } from "./components/previews/GooglePreview";
 
 const platformStyles = {
   instagram: {
@@ -364,43 +367,26 @@ export default function Home() {
 
                           {/* Instagram */}
                           {key === "instagram" && (
-                            <>
-                              <div className="flex gap-4 px-4 pt-3 text-lg text-[#59665f]">
-                                ♡ 💬 ↗
-                              </div>
-
-                              <p className="px-4 pb-4 pt-2 line-clamp-6 whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
-                                {generatedContent[key].post}
-                              </p>
-                            </>
+                            <InstagramPreview
+                              image={image}
+                              post={generatedContent[key].post}
+                            />
                           )}
 
                           {/* Facebook */}
                           {key === "facebook" && (
-                            <>
-                              <div className="flex justify-between border-t border-[#f0efeb] px-4 py-3 text-xs font-medium text-[#59665f]">
-                                <span>👍 Like</span>
-                                <span>💬 Comment</span>
-                                <span>↗ Share</span>
-                              </div>
-
-                              <p className="px-4 pb-4 text-sm leading-relaxed text-[#37443c] line-clamp-6 whitespace-pre-line">
-                                {generatedContent[key].post}
-                              </p>
-                            </>
+                            <FacebookPreview
+                              image={image}
+                              post={generatedContent[key].post}
+                            />
                           )}
 
                           {/* Google Business */}
                           {key === "google" && (
-                            <>
-                              <p className="px-4 pt-4 text-xs font-semibold text-[#909891]">
-                                Latest update
-                              </p>
-
-                              <p className="px-4 pb-4 pt-2 line-clamp-6 whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
-                                {generatedContent[key].post}
-                              </p>
-                            </>
+                            <GooglePreview
+                              image={image}
+                              post={generatedContent[key].post}
+                            />
                           )}
                         </div>
                       </div>
