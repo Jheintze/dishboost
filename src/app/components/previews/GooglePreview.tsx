@@ -1,10 +1,12 @@
 type GooglePreviewProps = {
   restaurant: string;
   image?: string;
-  post: string;
+  summary: string;
+  details: string;
+  cta: string;
 };
 
-export function GooglePreview({ restaurant, image, post }: GooglePreviewProps) {
+export function GooglePreview({ restaurant, image, summary, details, cta }: GooglePreviewProps) {
   return (
     <div className="overflow-hidden bg-white">
       <div className="px-4 py-3">
@@ -17,7 +19,7 @@ export function GooglePreview({ restaurant, image, post }: GooglePreviewProps) {
 
       <div className="px-4 py-4">
         <p className="whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
-          {post}
+          {summary}
         </p>
 
         <button className="mt-4 rounded-lg border border-[#dadce0] px-4 py-2 text-sm font-medium text-[#1a73e8]">

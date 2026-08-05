@@ -8,6 +8,7 @@ import { FacebookPreview } from "./components/previews/FacebookPreview";
 import { GooglePreview } from "./components/previews/GooglePreview";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
+import { GeneratedContent } from "@/app/types/marketing";
 
 const platformStyles = {
   instagram: {
@@ -36,11 +37,7 @@ const platformStyles = {
   // },
 };
 
-type GeneratedContent = {
-  instagram: { post: string };
-  facebook: { post: string };
-  google: { post: string };
-};
+
 
 export default function Home() {
   const [restaurant, setRestaurant] = useState("");
@@ -367,8 +364,10 @@ export default function Home() {
                           {key === "facebook" && (
                             <FacebookPreview
                               restaurant={restaurant}
+                              description={description}
                               image={image}
                               post={generatedContent[key].post}
+                              cta={generatedContent[key].cta}
                             />
                           )}
 
@@ -376,7 +375,9 @@ export default function Home() {
                             <GooglePreview
                               restaurant={restaurant}
                               image={image}
-                              post={generatedContent[key].post}
+                              summary={generatedContent[key].summary}
+                              details={generatedContent[key].details}
+                              cta={generatedContent[key].cta}
                             />
                           )}
                         </div>

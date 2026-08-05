@@ -2,12 +2,14 @@ type FacebookPreviewProps = {
   restaurant: string;
   image?: string;
   post: string;
+  cta: string;
 };
 
 export function FacebookPreview({
   restaurant,
   image,
   post,
+  cta,
 }: FacebookPreviewProps) {
   return (
     <div className="overflow-hidden bg-white">
@@ -28,14 +30,15 @@ export function FacebookPreview({
       <p className="px-4 pb-3 whitespace-pre-line text-sm leading-relaxed text-[#37443c]">
         {post}
       </p>
+      <p className="px-4 pt-2 pb-4 text-sm font-medium text-[#37443c]">{cta}</p>
 
       {/* Image */}
       {image && <img src={image} className="h-56 w-full object-cover" />}
 
       {/* Reactions */}
       <div className="flex items-center justify-between px-4 py-3 text-xs text-[#59665f]">
-        <span>👍 ❤️ 24</span>
-        <span>12 comments</span>
+        <span>👍 ❤️ 1027</span>
+        <span>397 comments</span>
       </div>
 
       {/* Actions */}

@@ -3,23 +3,7 @@ import {
   marketingSystemPrompt,
   createMarketingPrompt,
 } from "@/app/lib/prompts/prompts";
-
-type AIResponse = {
-  instagram: {
-    caption: string;
-    cta: string;
-    hashtags: string[];
-  };
-  facebook: {
-    post: string;
-    cta: string;
-  };
-  google: {
-    summary: string;
-    details: string;
-    cta: string;
-  };
-};
+import { AIResponse } from "@/app/types/marketing";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
