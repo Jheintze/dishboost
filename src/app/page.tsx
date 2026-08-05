@@ -11,19 +11,20 @@ const platformStyles = {
   instagram: {
     label: "Instagram",
     icon: "instagram" as IconName,
-    color: "bg-[#f3e9ed] text-[#b24f72]",
+    color:
+      "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white",
     meta: "Caption + hashtags",
   },
   facebook: {
     label: "Facebook",
     icon: "facebook" as IconName,
-    color: "bg-[#e9eff9] text-[#3568b9]",
+    color: "bg-blue-600 text-white",
     meta: "Community post",
   },
   google: {
     label: "Google Business",
     icon: "google" as IconName,
-    color: "bg-[#f4eee3] text-[#987535]",
+    color: "bg-white border border-[#e5e6e2] text-[#4285f4]",
     meta: "Local update",
   },
   // email: {

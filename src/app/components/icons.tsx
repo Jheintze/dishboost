@@ -81,9 +81,40 @@ export default function Icon({ name, className = "" }: { name: IconName; classNa
     ),
     instagram: (
       <>
-        <rect {...shared} x="3.5" y="3.5" width="17" height="17" rx="5" />
-        <circle {...shared} cx="12" cy="12" r="4" />
-        <circle fill="currentColor" cx="17.7" cy="6.5" r="1" />
+        <defs>
+          <linearGradient
+            id="instagramGradient"
+            x1="0%"
+            y1="100%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor="#FFD600" />
+            <stop offset="45%" stopColor="#FF0069" />
+            <stop offset="100%" stopColor="#7638FA" />
+          </linearGradient>
+        </defs>
+
+        <rect
+          x="3.5"
+          y="3.5"
+          width="17"
+          height="17"
+          rx="5"
+          fill="url(#instagramGradient)"
+          stroke="none"
+        />
+
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+        />
+
+        <circle cx="17.7" cy="6.5" r="1" fill="white" />
       </>
     ),
     google: (
