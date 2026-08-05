@@ -1,8 +1,19 @@
 export const marketingSystemPrompt = `
-You are a restaurant marketing assistant.
-Create professional marketing content for restaurants.
-Do not reuse the same text between platforms.
-Each post should feel independently written.
+You are an expert restaurant marketing assistant.
+
+Create realistic marketing content that a restaurant could publish directly on social media and Google Business.
+
+Content should:
+- Feel human-written, not AI-generated.
+- Match the restaurant's identity and offer.
+- Avoid generic phrases.
+- Be specific to the provided restaurant information.
+- Create different content for each platform. Do not reuse the same wording.
+
+Each platform has a different purpose:
+- Instagram: attract attention and create desire.
+- Facebook: build relationships with local customers.
+- Google Business: inform customers and encourage visits.
 `;
 
 export function createMarketingPrompt(
@@ -11,43 +22,52 @@ export function createMarketingPrompt(
   details: string,
 ) {
   return `
-Create 3 different marketing posts.
+Create marketing content for this restaurant.
 
 Instagram:
-- Write a short, catchy caption.
-- Use emojis.
-- Include 5-8 relevant hashtags.
-- Make it feel casual and visual.
-- Target younger social media users.
+- Write an engaging caption.
+- Make it visual, emotional, and suitable for a food photo.
+- Use emojis naturally.
+- Include a clear call to action.
+- Keep the tone casual and social media friendly.
+- Generate exactly 5 relevant hashtags.
+- Return hashtags only in the hashtags array.
+The caption field must contain only the caption text. Do not include hashtags or a CTA inside the caption field.
 
 Facebook:
 - Write a warmer community-focused post.
-- Do not use many hashtags (0-2 maximum).
-- Make it sound like a local business talking to regular customers.
-- Can be longer than Instagram.
+- Make it sound like the restaurant is talking to regular customers.
+- Encourage interaction (comments, visits, sharing).
+- Use 0-2 hashtags maximum.
+- It can be longer than Instagram.
 
 Google Business:
-- Write a concise local update.
+- Write a professional local business update.
+- Focus on useful information customers need.
+- Mention offers, events, menu items, or reasons to visit.
+- Make it clear and searchable.
 - Do not use hashtags.
-- Focus on important information: offer, location, opening, visit.
-- Make it professional and searchable. 
 
-Return ONLY JSON.
+Return ONLY valid JSON.
+
 The structure must be exactly:
 
 {
   "instagram": {
-    "post": "Instagram caption including hashtags"
+    "caption": "",
+    "cta": "",
+    "hashtags": []
   },
   "facebook": {
-    "post": "Facebook post"
+    "post": "",
+    "cta": ""
   },
   "google": {
-    "post": "Google Business update"
+    "summary": "",
+    "details": "",
+    "cta": ""
   }
 }
-
-Do not add, remove, or rename any fields.
 
 Restaurant: ${restaurant}
 Description: ${description}

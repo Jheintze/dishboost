@@ -4,6 +4,23 @@ import {
   createMarketingPrompt,
 } from "@/app/lib/prompts/prompts";
 
+type AIResponse = {
+  instagram: {
+    caption: string;
+    cta: string;
+    hashtags: string[];
+  };
+  facebook: {
+    post: string;
+    cta: string;
+  };
+  google: {
+    summary: string;
+    details: string;
+    cta: string;
+  };
+};
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -27,14 +44,24 @@ export async function POST(req: Request) {
       },
     ],
     temperature: 0.5,
-    max_tokens: 600,
+    max_tokens: 350,
   });
 
   console.log(completion.choices[0].message.content);
   const raw = completion.choices[0].message.content || "";
 
-  const aiResponse = JSON.parse(
+  const aiResponse: AIResponse = JSON.parse(
     raw.replace("```json", "").replace("```", "").trim(),
+  );
+
+  // Clean Instagram caption
+  aiResponse.instagram.caption = aiResponse.instagram.caption
+    .replace(/#[\wÀ-ÿ]+/g, "")
+    .trim();
+
+  // Ensure hashtags have #
+  aiResponse.instagram.hashtags = aiResponse.instagram.hashtags.map(
+    (tag: string) => (tag.startsWith("#") ? tag : `#${tag}`),
   );
 
   return Response.json({

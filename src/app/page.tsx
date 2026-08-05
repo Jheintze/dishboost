@@ -358,7 +358,9 @@ export default function Home() {
                               restaurant={restaurant}
                               description={description}
                               image={image}
-                              post={generatedContent[key].post}
+                              caption={generatedContent[key].caption}
+                              cta={generatedContent[key].cta}
+                              hashtags={generatedContent[key].hashtags}
                             />
                           )}
 

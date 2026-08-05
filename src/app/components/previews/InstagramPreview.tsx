@@ -4,14 +4,18 @@ type InstagramPreviewProps = {
   restaurant: string;
   description: string;
   image?: string;
-  post: string;
+  caption: string;
+  cta: string;
+  hashtags: string[];
 };
 
 export function InstagramPreview({
   restaurant,
   description,
   image,
-  post,
+  caption,
+  cta,
+  hashtags,
 }: InstagramPreviewProps) {
   return (
     <div className="overflow-hidden rounded-xl border border-[#e6e4df] bg-white">
@@ -52,8 +56,18 @@ export function InstagramPreview({
       {/* Caption */}
       <div className="px-4 pb-4 text-sm leading-relaxed text-[#37443c]">
         <p>
-          <span className="font-semibold">{restaurant}</span> {post}
+          <span className="font-semibold">{restaurant}</span>
         </p>
+        <p className="mt-1">{caption}</p>
+        <p className="mt-3">{cta}</p>
+
+        <div className="mt-2 flex flex-wrap gap-1">
+          {hashtags
+            .filter((tag) => tag)
+            .map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+        </div>
       </div>
     </div>
   );
