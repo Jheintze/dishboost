@@ -6,25 +6,26 @@ import Icon, { type IconName } from "./components/icons";
 import { InstagramPreview } from "./components/previews/InstagramPreview";
 import { FacebookPreview } from "./components/previews/FacebookPreview";
 import { GooglePreview } from "./components/previews/GooglePreview";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 
 const platformStyles = {
   instagram: {
     label: "Instagram",
-    icon: "instagram" as IconName,
-    color:
-      "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white",
+    icon: <FaInstagram className="size-[18px] text-white" />,
+    color: "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]",
     meta: "Caption + hashtags",
   },
   facebook: {
     label: "Facebook",
-    icon: "facebook" as IconName,
-    color: "bg-blue-600 text-white",
+    icon: <FaFacebookF className="size-[18px] text-white" />,
+    color: "bg-[#1877F2]",
     meta: "Community post",
   },
   google: {
     label: "Google Business",
-    icon: "google" as IconName,
-    color: "bg-white border border-[#e5e6e2] text-[#4285f4]",
+    icon: <FcGoogle className="size-[18px]" />,
+    color: "bg-white border border-[#e5e6e2]",
     meta: "Local update",
   },
   // email: {
@@ -313,10 +314,7 @@ export default function Home() {
                           <span
                             className={`flex size-9 items-center justify-center rounded-full ${platform.color}`}
                           >
-                            <Icon
-                              name={platform.icon}
-                              className="size-[18px]"
-                            />
+                            {platform.icon}
                           </span>
 
                           <div>
@@ -366,6 +364,7 @@ export default function Home() {
 
                           {key === "facebook" && (
                             <FacebookPreview
+                              restaurant={restaurant}
                               image={image}
                               post={generatedContent[key].post}
                             />
@@ -373,6 +372,7 @@ export default function Home() {
 
                           {key === "google" && (
                             <GooglePreview
+                              restaurant={restaurant}
                               image={image}
                               post={generatedContent[key].post}
                             />
