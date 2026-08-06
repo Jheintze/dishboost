@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   const { restaurant, description, details } = await req.json();
 
   const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4.1-mini",
     messages: [
       {
         role: "system",
@@ -21,13 +21,10 @@ export async function POST(req: Request) {
       },
       {
         role: "user",
-        content: createMarketingPrompt(
-        restaurant ,
-        description,
-        details)
+        content: createMarketingPrompt(restaurant, description, details),
       },
     ],
-    temperature: 0.5,
+    temperature: 0.3,
     max_tokens: 700,
   });
 
