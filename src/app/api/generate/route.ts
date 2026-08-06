@@ -10,7 +10,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const LIMIT = 10;
+const LIMIT = 2;
 
 export async function POST(req: Request) {
   try {
@@ -25,6 +25,7 @@ export async function POST(req: Request) {
       .eq("date", today)
       .maybeSingle();
 
+
     if (data && data.count >= LIMIT) {
       return Response.json(
         {
@@ -38,7 +39,7 @@ export async function POST(req: Request) {
     const remaining = Math.max(0, LIMIT - newCount);
 
     const completion = await openai.chat.completions.create({
-      model: "imax",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -60,10 +61,11 @@ export async function POST(req: Request) {
       raw.replace("```json", "").replace("```", "").trim(),
     );
     if (data) {
-      await supabase
+       const result = await supabase
         .from("daily_usage")
         .update({ count: data.count + 1 })
-        .eq("id", data.id);
+        .eq("id", data.id); 
+        console.log(result);
     } else {
       await supabase.from("daily_usage").insert([
         {
@@ -73,6 +75,10 @@ export async function POST(req: Request) {
         },
       ]);
     }
+
+
+
+
     // Clean Instagram caption
     aiResponse.instagram.caption = aiResponse.instagram.caption
       .replace(/#[\wÀ-ÿ]+/g, "")
