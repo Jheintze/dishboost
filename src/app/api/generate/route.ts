@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       },
     ],
     temperature: 0.5,
-    max_tokens: 350,
+    max_tokens: 700,
   });
 
   console.log(completion.choices[0].message.content);
