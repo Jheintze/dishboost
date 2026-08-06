@@ -10,7 +10,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const LIMIT = 2;
+const LIMIT = 10;
 
 export async function POST(req: Request) {
   try {
@@ -54,18 +54,25 @@ export async function POST(req: Request) {
       max_tokens: 700,
     });
 
-    console.log(completion.choices[0].message.content);
     const raw = completion.choices[0].message.content || "";
 
     const aiResponse: AIResponse = JSON.parse(
       raw.replace("```json", "").replace("```", "").trim(),
     );
+
+    await supabase.from("events").insert([
+      {
+        event_type: "generation_completed",
+        ip,
+        has_image: false,
+      },
+    ]);
+
     if (data) {
        const result = await supabase
         .from("daily_usage")
         .update({ count: data.count + 1 })
         .eq("id", data.id); 
-        console.log(result);
     } else {
       await supabase.from("daily_usage").insert([
         {
@@ -75,10 +82,6 @@ export async function POST(req: Request) {
         },
       ]);
     }
-
-
-
-
     // Clean Instagram caption
     aiResponse.instagram.caption = aiResponse.instagram.caption
       .replace(/#[\wÀ-ÿ]+/g, "")
