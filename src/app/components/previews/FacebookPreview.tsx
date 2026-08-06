@@ -1,3 +1,5 @@
+import { capitalizeWords } from "@/app/lib/utils/text";
+
 type FacebookPreviewProps = {
   restaurant: string;
   image?: string;
@@ -11,6 +13,7 @@ export function FacebookPreview({
   post,
   cta,
 }: FacebookPreviewProps) {
+  const displayRestaurant = capitalizeWords(restaurant);
   return (
     <div className="overflow-hidden bg-white">
       {/* Header */}
@@ -20,7 +23,9 @@ export function FacebookPreview({
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-[#263630]">{restaurant}</p>
+          <p className="text-sm font-semibold text-[#263630]">
+            {displayRestaurant}
+          </p>
 
           <p className="text-xs text-[#909891]">Just now · 🌎</p>
         </div>

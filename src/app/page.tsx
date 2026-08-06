@@ -206,16 +206,27 @@ export default function Home() {
                       {/* Uploaded image preview */}
                       <Image
                         src={image}
-                        alt="Uploaded food"
+                        alt="Uploaded food picture"
                         fill
                         unoptimized
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                       />
-
-                      <span className="relative rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#315543] shadow-sm">
-                        Replace photo
-                      </span>
+                      <div className="relative flex gap-2">
+                        <span className="relative rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#315543] shadow-sm">
+                          Replace photo
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setImage(null);
+                          }}
+                          className="cursor-pointer rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-red-600 shadow-sm transition hover:bg-red-50"
+                        >
+                          Remove photo
+                        </button>
+                      </div>
                     </>
                   ) : (
                     /* Empty upload state */

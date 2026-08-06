@@ -1,3 +1,5 @@
+import { capitalizeWords } from "@/app/lib/utils/text";
+
 type GooglePreviewProps = {
   restaurant: string;
   image?: string;
@@ -13,11 +15,14 @@ export function GooglePreview({
   details,
   cta,
 }: GooglePreviewProps) {
+  const displayRestaurant = capitalizeWords(restaurant);
   return (
     <div className="overflow-hidden rounded-xl border border-[#dadce0] bg-white">
       {/* Header */}
       <div className="px-4 py-3">
-        <p className="text-base font-semibold text-[#202124]">{restaurant}</p>
+        <p className="text-base font-semibold text-[#202124]">
+          {displayRestaurant}
+        </p>
 
         <p className="text-xs text-[#5f6368]">Latest update</p>
       </div>

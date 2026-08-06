@@ -1,4 +1,5 @@
 import Icon from "../icons";
+import { capitalizeWords } from "@/app/lib/utils/text";
 
 type InstagramPreviewProps = {
   restaurant: string;
@@ -17,6 +18,9 @@ export function InstagramPreview({
   cta,
   hashtags,
 }: InstagramPreviewProps) {
+
+  const displayRestaurant = capitalizeWords(restaurant);
+
   return (
     <div className="overflow-hidden rounded-xl border border-[#e6e4df] bg-white">
       {/* Header */}
@@ -26,7 +30,9 @@ export function InstagramPreview({
           <div className="size-9 rounded-full bg-[#dfe8df]" />
 
           <div>
-            <p className="text-sm font-semibold text-[#263630]">{restaurant}</p>
+            <p className="text-sm font-semibold text-[#263630]">
+              {displayRestaurant}
+            </p>
 
             <p className="text-xs text-[#909891] line-clamp-1">{description}</p>
           </div>
@@ -56,7 +62,7 @@ export function InstagramPreview({
       {/* Caption */}
       <div className="px-4 pb-4 text-sm leading-relaxed text-[#37443c]">
         <p>
-          <span className="font-semibold">{restaurant}</span>
+          <span className="font-semibold">{displayRestaurant}</span>
         </p>
         <p className="mt-1">{caption}</p>
         <p className="mt-3">{cta}</p>
