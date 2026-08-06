@@ -4,14 +4,38 @@ import {
   createMarketingPrompt,
 } from "@/app/lib/prompts/prompts";
 import { AIResponse } from "@/app/types/marketing";
+import { supabase } from "@/app/lib/utils/supabase";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const LIMIT = 10;
+
 export async function POST(req: Request) {
   try {
     const { restaurant, description, details } = await req.json();
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "unknown";
+    const today = new Date().toISOString().split("T")[0];
+
+    const { data } = await supabase
+      .from("daily_usage")
+      .select("*")
+      .eq("ip", ip)
+      .eq("date", today)
+      .maybeSingle();
+
+    if (data && data.count >= LIMIT) {
+      return Response.json(
+        {
+          error: "Daily limit reached (10 free generations).",
+          remaining: 0,
+        },
+        { status: 429 },
+      );
+    }
+    const newCount = data ? data.count + 1 : 1;
+    const remaining = Math.max(0, LIMIT - newCount);
 
     const completion = await openai.chat.completions.create({
       model: "imax",
@@ -35,7 +59,20 @@ export async function POST(req: Request) {
     const aiResponse: AIResponse = JSON.parse(
       raw.replace("```json", "").replace("```", "").trim(),
     );
-
+    if (data) {
+      await supabase
+        .from("daily_usage")
+        .update({ count: data.count + 1 })
+        .eq("id", data.id);
+    } else {
+      await supabase.from("daily_usage").insert([
+        {
+          ip,
+          date: today,
+          count: 1,
+        },
+      ]);
+    }
     // Clean Instagram caption
     aiResponse.instagram.caption = aiResponse.instagram.caption
       .replace(/#[\wÀ-ÿ]+/g, "")
@@ -48,8 +85,8 @@ export async function POST(req: Request) {
 
     return Response.json({
       generatedCaption: aiResponse,
+      remaining,
     });
-
   } catch (error) {
     console.error(error);
 
