@@ -40,6 +40,7 @@ const platformStyles = {
 
 
 export default function Home() {
+  const [error, setError] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState("");
   const [details, setDetails] = useState("");
@@ -69,6 +70,13 @@ export default function Home() {
 
     const result = await res.json();
 
+    if (!res.ok) {
+       setError(result.error || "Failed to generate content");
+       setIsGenerating(false);
+       return;
+    }
+
+    setError("");
     setGeneratedContent(result.generatedCaption);
     setIsGenerating(false);
   }
@@ -278,6 +286,7 @@ export default function Home() {
 
                 <Icon name="arrow" className="size-4" />
               </button>
+              {error && <p className="mt-3 text-sm text-red-600 text-center">{error}</p>}
             </div>
           </section>
 

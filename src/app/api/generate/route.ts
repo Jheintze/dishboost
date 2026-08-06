@@ -10,42 +10,52 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
-  const { restaurant, description, details } = await req.json();
+  try {
+    const { restaurant, description, details } = await req.json();
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    messages: [
-      {
-        role: "system",
-        content: marketingSystemPrompt,
-      },
-      {
-        role: "user",
-        content: createMarketingPrompt(restaurant, description, details),
-      },
-    ],
-    temperature: 0.3,
-    max_tokens: 700,
-  });
+    const completion = await openai.chat.completions.create({
+      model: "imax",
+      messages: [
+        {
+          role: "system",
+          content: marketingSystemPrompt,
+        },
+        {
+          role: "user",
+          content: createMarketingPrompt(restaurant, description, details),
+        },
+      ],
+      temperature: 0.3,
+      max_tokens: 700,
+    });
 
-  console.log(completion.choices[0].message.content);
-  const raw = completion.choices[0].message.content || "";
+    console.log(completion.choices[0].message.content);
+    const raw = completion.choices[0].message.content || "";
 
-  const aiResponse: AIResponse = JSON.parse(
-    raw.replace("```json", "").replace("```", "").trim(),
-  );
+    const aiResponse: AIResponse = JSON.parse(
+      raw.replace("```json", "").replace("```", "").trim(),
+    );
 
-  // Clean Instagram caption
-  aiResponse.instagram.caption = aiResponse.instagram.caption
-    .replace(/#[\wÀ-ÿ]+/g, "")
-    .trim();
+    // Clean Instagram caption
+    aiResponse.instagram.caption = aiResponse.instagram.caption
+      .replace(/#[\wÀ-ÿ]+/g, "")
+      .trim();
 
-  // Ensure hashtags have #
-  aiResponse.instagram.hashtags = aiResponse.instagram.hashtags.map(
-    (tag: string) => (tag.startsWith("#") ? tag : `#${tag}`),
-  );
+    // Ensure hashtags have #
+    aiResponse.instagram.hashtags = aiResponse.instagram.hashtags.map(
+      (tag: string) => (tag.startsWith("#") ? tag : `#${tag}`),
+    );
 
-  return Response.json({
-    generatedCaption: aiResponse,
-  });
+    return Response.json({
+      generatedCaption: aiResponse,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      { error: "Failed to generate content" },
+      { status: 500 },
+    );
+  }
 }
