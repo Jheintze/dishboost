@@ -14,7 +14,7 @@ const LIMIT = 10;
 
 export async function POST(req: Request) {
   try {
-    const { restaurant, description, details, image } = await req.json();
+    const { restaurant, description, details, image, language} = await req.json();
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "unknown";
     const today = new Date().toISOString().split("T")[0];
 
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     const userContent: any[] = [
       {
         type: "text",
-        text: createMarketingPrompt(restaurant, description, details),
+        text: createMarketingPrompt(restaurant, description, details, language),
       },
     ];
 

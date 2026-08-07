@@ -47,9 +47,13 @@ export function createMarketingPrompt(
   restaurant: string,
   description: string,
   details: string,
+  language:string,
 ) {
   return `
 Create marketing content for this restaurant.
+Write all generated content in ${language}.
+Do not mix languages.
+Use only this language for Instagram, Facebook, and Google Business.
 
 Instagram:
 - Write an engaging caption.

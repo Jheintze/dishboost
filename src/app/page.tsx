@@ -44,6 +44,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState("");
+  const [language, setLanguage] = useState("German");
   const [details, setDetails] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -82,6 +83,7 @@ export default function Home() {
         description,
         details,
         image,
+        language,
       }),
     });
 
@@ -205,6 +207,35 @@ export default function Home() {
                   placeholder="Your cuisine, neighborhood, or vibe"
                 />
               </label>
+
+              {/* Promotion / event details */}
+              <label className="block">
+                <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#304038]">
+                  Promotion or event details{" "}
+                  <span className="font-normal text-[#9ba39e]">(optional)</span>
+                </span>
+
+                <textarea
+                  value={details}
+                  onChange={(e) => setDetails(e.target.value)}
+                  rows={3}
+                  className="w-full resize-none rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 py-3 text-[15px] leading-6 outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]"
+                  placeholder="e.g. Happy hour, new menu, live music Friday"
+                />
+              </label>
+              {/* Content language */}
+              <div className="flex items-center justify-start gap-2 text-sm text-[#8c9690]">
+                <span>Create posts in:</span>
+
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="cursor-pointer bg-transparent font-semibold text-[#304038] outline-none"
+                >
+                  <option value="German">German</option>
+                  <option value="English">English</option>
+                </select>
+              </div>
               {/* ================= IMAGE UPLOAD ================= */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
@@ -273,22 +304,6 @@ export default function Home() {
                 </label>
               </div>
 
-              {/* Promotion / event details */}
-              <label className="block">
-                <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#304038]">
-                  Promotion or event details{" "}
-                  <span className="font-normal text-[#9ba39e]">(optional)</span>
-                </span>
-
-                <textarea
-                  value={details}
-                  onChange={(e) => setDetails(e.target.value)}
-                  rows={3}
-                  className="w-full resize-none rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 py-3 text-[15px] leading-6 outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]"
-                  placeholder="e.g. Happy hour, new menu, live music Friday"
-                />
-              </label>
-
               {/* Generate content button */}
               <button
                 onClick={handleGenerate}
@@ -303,7 +318,9 @@ export default function Home() {
 
                 <Icon name="arrow" className="size-4" />
               </button>
-              {error && <p className="mt-3 text-sm text-red-600 text-center">{error}</p>}
+              {error && (
+                <p className="mt-3 text-sm text-red-600 text-center">{error}</p>
+              )}
             </div>
           </section>
 
@@ -407,7 +424,7 @@ export default function Home() {
 
                           {key === "facebook" && (
                             <FacebookPreview
-                              restaurant={restaurant}                           
+                              restaurant={restaurant}
                               image={image}
                               post={generatedContent[key].post}
                               cta={generatedContent[key].cta}
