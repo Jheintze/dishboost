@@ -407,8 +407,7 @@ export default function Home() {
 
                           {key === "facebook" && (
                             <FacebookPreview
-                              restaurant={restaurant}
-                              description={description}
+                              restaurant={restaurant}                           
                               image={image}
                               post={generatedContent[key].post}
                               cta={generatedContent[key].cta}
