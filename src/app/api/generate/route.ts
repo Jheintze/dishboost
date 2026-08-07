@@ -10,7 +10,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const LIMIT = 30;
+const LIMIT = 10;
 
 export async function POST(req: Request) {
   try {
