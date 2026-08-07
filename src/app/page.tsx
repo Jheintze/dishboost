@@ -2,13 +2,14 @@
 
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
-import Icon, { type IconName } from "./components/icons";
+import Icon from "./components/icons";
 import { InstagramPreview } from "./components/previews/InstagramPreview";
 import { FacebookPreview } from "./components/previews/FacebookPreview";
 import { GooglePreview } from "./components/previews/GooglePreview";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { GeneratedContent } from "@/app/types/marketing";
+import { useEffect } from "react";
 
 const platformStyles = {
   instagram: {
@@ -49,10 +50,25 @@ export default function Home() {
   const [copied, setCopied] = useState<string | null>(null);
   const [generatedContent, setGeneratedContent] =
     useState<GeneratedContent | null>(null);
+ 
+   useEffect(() => {
+     fetch("/api/analytics", {
+       method: "POST",
+     });
+   }, []);
 
   function handleImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
-    if (file) setImage(URL.createObjectURL(file));
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
   }
 
   async function handleGenerate() {
@@ -65,6 +81,7 @@ export default function Home() {
         restaurant,
         description,
         details,
+        image,
       }),
     });
 

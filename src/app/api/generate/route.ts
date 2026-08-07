@@ -10,11 +10,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const LIMIT = 10;
+const LIMIT = 30;
 
 export async function POST(req: Request) {
   try {
-    const { restaurant, description, details } = await req.json();
+    const { restaurant, description, details, image } = await req.json();
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "unknown";
     const today = new Date().toISOString().split("T")[0];
 
@@ -24,7 +24,6 @@ export async function POST(req: Request) {
       .eq("ip", ip)
       .eq("date", today)
       .maybeSingle();
-
 
     if (data && data.count >= LIMIT) {
       return Response.json(
@@ -38,6 +37,25 @@ export async function POST(req: Request) {
     const newCount = data ? data.count + 1 : 1;
     const remaining = Math.max(0, LIMIT - newCount);
 
+    const userContent: any[] = [
+      {
+        type: "text",
+        text: createMarketingPrompt(restaurant, description, details),
+      },
+    ];
+
+    if (image) {
+      userContent.push({
+        type: "image_url",
+        image_url: {
+          url: image,
+        },
+      });
+    }
+ 
+   console.log("Has image:", !!image);
+   console.log("Image start:", image?.substring(0, 50));
+
     const completion = await openai.chat.completions.create({
       model: "gpt-4.1-mini",
       messages: [
@@ -47,7 +65,7 @@ export async function POST(req: Request) {
         },
         {
           role: "user",
-          content: createMarketingPrompt(restaurant, description, details),
+          content: userContent,
         },
       ],
       temperature: 0.3,
@@ -69,10 +87,10 @@ export async function POST(req: Request) {
     ]);
 
     if (data) {
-       const result = await supabase
+      const result = await supabase
         .from("daily_usage")
         .update({ count: data.count + 1 })
-        .eq("id", data.id); 
+        .eq("id", data.id);
     } else {
       await supabase.from("daily_usage").insert([
         {
@@ -82,6 +100,7 @@ export async function POST(req: Request) {
         },
       ]);
     }
+      console.log(completion.choices[0].message.content);
     // Clean Instagram caption
     aiResponse.instagram.caption = aiResponse.instagram.caption
       .replace(/#[\wÀ-ÿ]+/g, "")
