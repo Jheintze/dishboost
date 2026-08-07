@@ -2,7 +2,7 @@ import { capitalizeWords } from "@/app/lib/utils/text";
 
 type FacebookPreviewProps = {
   restaurant: string;
-  image?: string;
+  image?: string | null;
   post: string;
   cta: string;
 };

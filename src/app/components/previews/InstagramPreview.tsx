@@ -4,7 +4,7 @@ import { capitalizeWords } from "@/app/lib/utils/text";
 type InstagramPreviewProps = {
   restaurant: string;
   description: string;
-  image?: string;
+  image?: string | null;
   caption: string;
   cta: string;
   hashtags: string[];

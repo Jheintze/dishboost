@@ -2,7 +2,7 @@ import { capitalizeWords } from "@/app/lib/utils/text";
 
 type GooglePreviewProps = {
   restaurant: string;
-  image?: string;
+  image?: string | null;
   summary: string;
   details: string;
   cta: string;
