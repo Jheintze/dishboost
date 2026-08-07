@@ -363,7 +363,14 @@ export default function Home() {
 
                         <button
                           onClick={() =>
-                            copyContent(key, generatedContent[key].post)
+                            copyContent(
+                              key,
+                              key === "instagram"
+                                ? generatedContent[key].caption
+                                : key === "facebook"
+                                  ? generatedContent[key].post
+                                  : `${generatedContent[key].summary}\n\n${generatedContent[key].details}`,
+                            )
                           }
                           className="flex h-8 items-center gap-1.5 rounded-lg border border-[#e5e6e2] px-2.5 text-xs font-semibold text-[#59665f]"
                         >
