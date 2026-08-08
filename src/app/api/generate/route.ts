@@ -57,7 +57,7 @@ export async function POST(req: Request) {
    console.log("Image start:", image?.substring(0, 50));
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "pt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -87,7 +87,7 @@ export async function POST(req: Request) {
     ]);
 
     if (data) {
-      const result = await supabase
+        await supabase
         .from("daily_usage")
         .update({ count: data.count + 1 })
         .eq("id", data.id);

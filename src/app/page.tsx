@@ -38,25 +38,24 @@ const platformStyles = {
   // },
 };
 
-
-
 export default function Home() {
   const [error, setError] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState("German");
   const [details, setDetails] = useState("");
+  const [remaining, setRemaining] = useState<number>(10);
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
   const [generatedContent, setGeneratedContent] =
     useState<GeneratedContent | null>(null);
- 
-   useEffect(() => {
-     fetch("/api/analytics", {
-       method: "POST",
-     });
-   }, []);
+
+  useEffect(() => {
+    fetch("/api/analytics", {
+      method: "POST",
+    });
+  }, []);
 
   function handleImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -90,10 +89,12 @@ export default function Home() {
     const result = await res.json();
 
     if (!res.ok) {
-       setError(result.error || "Failed to generate content");
-       setIsGenerating(false);
-       return;
+      setError(result.error || "Failed to generate content");
+      setIsGenerating(false);
+      return;
     }
+
+    setRemaining(result.remaining);
 
     setError("");
     setGeneratedContent(result.generatedCaption);
@@ -318,6 +319,11 @@ export default function Home() {
 
                 <Icon name="arrow" className="size-4" />
               </button>
+
+              <p className="mt-3 text-center text-xs text-[#8c9690]">
+                {remaining} free generations remaining today
+              </p>
+
               {error && (
                 <p className="mt-3 text-sm text-red-600 text-center">{error}</p>
               )}
