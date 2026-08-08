@@ -10,6 +10,7 @@ import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { GeneratedContent } from "@/app/types/marketing";
 import { useEffect } from "react";
+import { translations } from "./lib/utils/translations";
 
 const platformStyles = {
   instagram: {
@@ -43,6 +44,7 @@ export default function Home() {
   const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState("German");
+  const [uiLanguage, setUiLanguage] = useState<"en" | "de">("de");
   const [details, setDetails] = useState("");
   const [remaining, setRemaining] = useState<number>(10);
   const [image, setImage] = useState<string | null>(null);
@@ -50,6 +52,7 @@ export default function Home() {
   const [copied, setCopied] = useState<string | null>(null);
   const [generatedContent, setGeneratedContent] =
     useState<GeneratedContent | null>(null);
+  const t = translations[uiLanguage];
 
   useEffect(() => {
     fetch("/api/analytics", {
@@ -70,7 +73,13 @@ export default function Home() {
       reader.readAsDataURL(file);
     }
   }
-
+  function handleLanguageToggle() {
+    if (uiLanguage === "de") {
+      setUiLanguage("en");
+    } else {
+      setUiLanguage("de");
+    }
+  }
   async function handleGenerate() {
     setIsGenerating(true);
 
@@ -124,7 +133,9 @@ export default function Home() {
               Dishboost
             </span>
           </a>
-
+          <button className ="cursor-pointer" onClick={handleLanguageToggle}>
+            {uiLanguage === "de" ? "EN" : "DE"}
+          </button>
           {/* Account / profile button */}
           <button
             className="flex size-9 items-center justify-center rounded-full border border-[#e2e2dc] bg-white text-[#516059]"
@@ -198,7 +209,7 @@ export default function Home() {
               {/* Restaurant description */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
-                  A little bit about your place
+                  {t.restaurantDescription}
                 </span>
 
                 <input
