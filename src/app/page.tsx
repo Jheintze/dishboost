@@ -133,7 +133,7 @@ export default function Home() {
               Dishboost
             </span>
           </a>
-          <button className ="cursor-pointer" onClick={handleLanguageToggle}>
+          <button className="cursor-pointer" onClick={handleLanguageToggle}>
             {uiLanguage === "de" ? "EN" : "DE"}
           </button>
           {/* Account / profile button */}
@@ -151,18 +151,16 @@ export default function Home() {
         {/* Hero headline and introduction */}
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#e6dfd0] bg-[#f8f3e9] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#8b6b2f]">
-            <span className="size-1.5 rounded-full bg-[#cf9e45]" /> Your
-            marketing prep, simplified
+            <span className="size-1.5 rounded-full bg-[#cf9e45]" />{" "}
+            {t.marketingPrepTitle}
           </p>
 
           <h1 className="font-serif text-4xl font-semibold leading-[1.04] tracking-[-0.055em] text-[#1e3029] sm:text-5xl lg:text-[58px]">
-            Make your next post
-            <br className="hidden sm:block" /> the easiest part of service.
+            {t.marketingPrepHeadline}
           </h1>
 
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-7 text-[#68736d] sm:text-base">
-            Turn one great food photo into thoughtful, on-brand marketing for
-            every channel — ready in a few clicks.
+            {t.marketingPrepDescription}
           </p>
         </div>
 
@@ -177,11 +175,11 @@ export default function Home() {
             <div className="flex items-start justify-between border-b border-[#eeece7] pb-5">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#a27735]">
-                  New creation
+                  {t.newCreation}
                 </p>
 
                 <h2 className="mt-1 font-serif text-2xl font-semibold tracking-[-0.035em] text-[#20312a]">
-                  What are we sharing?
+                  {t.pageTitle}
                 </h2>
               </div>
 
@@ -195,7 +193,7 @@ export default function Home() {
               {/* Restaurant name */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
-                  Restaurant name
+                  {t.restaurantName}
                 </span>
 
                 <input
@@ -223,7 +221,7 @@ export default function Home() {
               {/* Promotion / event details */}
               <label className="block">
                 <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#304038]">
-                  Promotion or event details{" "}
+                  {t.promotionDetails}{" "}
                   <span className="font-normal text-[#9ba39e]">(optional)</span>
                 </span>
 
@@ -237,7 +235,7 @@ export default function Home() {
               </label>
               {/* Content language */}
               <div className="flex items-center justify-start gap-2 text-sm text-[#8c9690]">
-                <span>Create posts in:</span>
+                <span>{t.createPostsIn}:</span>
 
                 <select
                   value={language}
@@ -252,11 +250,11 @@ export default function Home() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm font-semibold text-[#304038]">
-                    Add a food photo ( optional )
+                    {t.imageUpload} ( optional )
                   </span>
 
                   <span className="text-xs text-[#8c9690]">
-                    JPG, PNG · up to 10 MB
+                    {t.fileRequirements}
                   </span>
                 </div>
 
@@ -282,7 +280,7 @@ export default function Home() {
                       />
                       <div className="relative flex gap-2">
                         <span className="relative rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#315543] shadow-sm">
-                          Replace photo
+                          {t.replacePhoto}
                         </span>
                         <button
                           type="button"
@@ -292,7 +290,7 @@ export default function Home() {
                           }}
                           className="cursor-pointer rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-red-600 shadow-sm transition hover:bg-red-50"
                         >
-                          Remove photo
+                          {t.removePhoto}
                         </button>
                       </div>
                     </>
@@ -304,12 +302,12 @@ export default function Home() {
                       </span>
 
                       <span className="text-sm font-semibold text-[#34453c]">
-                        Drop a photo here or{" "}
+                        {t.dropPhoto}{" "}
                         <span className="text-[#42745d]">browse files</span>
                       </span>
 
                       <span className="mt-1 text-xs text-[#8c9690]">
-                        The better the photo, the better the story.
+                        {t.betterPhoto}
                       </span>
                     </span>
                   )}
@@ -324,15 +322,13 @@ export default function Home() {
               >
                 <Icon name="sparkle" className="size-4 text-[#f9cd74]" />
 
-                {isGenerating
-                  ? "Creating your content…"
-                  : "Create marketing content"}
+                {isGenerating ? t.creatingContent : t.createContent}
 
                 <Icon name="arrow" className="size-4" />
               </button>
 
               <p className="mt-3 text-center text-xs text-[#8c9690]">
-                {remaining} free generations remaining today
+                {remaining} {t.remainingGenerations}
               </p>
 
               {error && (
@@ -347,17 +343,17 @@ export default function Home() {
             <div className="mb-4 flex items-center justify-between px-1">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#8a8479]">
-                  Ready to share
+                  {t.readyToShare}
                 </p>
 
                 <h2 className="mt-1 font-serif text-2xl font-semibold tracking-[-0.035em] text-[#20312a]">
-                  Your content kit
+                  {t.contentKit}
                 </h2>
               </div>
 
               {/* Platform filter button */}
               <button className="flex items-center gap-1 text-sm font-semibold text-[#56655e] transition hover:text-[#2d493b]">
-                All platforms <Icon name="chevron" className="size-4" />
+                {t.allPlatforms} <Icon name="chevron" className="size-4" />
               </button>
             </div>
 
@@ -473,12 +469,11 @@ export default function Home() {
 
                 {/* Empty state message */}
                 <h3 className="mt-4 font-serif text-xl font-semibold text-[#273830]">
-                  Your content will appear here
+                  {t.contentPlaceholderTitle}
                 </h3>
 
                 <p className="mt-2 max-w-xs text-sm leading-6 text-[#818a84]">
-                  Add a few details about your dish, then we’ll create a
-                  tailored kit for every channel.
+                  {t.contentPlaceholderDescription}
                 </p>
               </div>
             )}
@@ -491,9 +486,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-[1440px] items-center justify-between text-xs text-[#89918c]">
           <span>© {new Date().getFullYear()} Dishboost</span>
 
-          <span className="hidden sm:block">
-            Focus on cooking, we'll handle the rest.
-          </span>
+          <span className="hidden sm:block">{t.footerTagline}</span>
         </div>
       </footer>
     </main>
