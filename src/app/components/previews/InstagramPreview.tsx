@@ -47,17 +47,17 @@ export function InstagramPreview({
       )}
 
       {/* Actions */}
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex gap-4">
-          <Icon name="heart" className="size-5 text-[#263630]" />
+      {image && (
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex gap-4">
+            <Icon name="heart" className="size-5 text-[#263630]" />
+            <Icon name="comment" className="size-5 text-[#263630]" />
+            <Icon name="send" className="size-5 text-[#263630]" />
+          </div>
 
-          <Icon name="comment" className="size-5 text-[#263630]" />
-
-          <Icon name="send" className="size-5 text-[#263630]" />
+          <Icon name="bookmark" className="size-5 text-[#263630]" />
         </div>
-
-        <Icon name="bookmark" className="size-5 text-[#263630]" />
-      </div>
+      )}
 
       {/* Caption */}
       <div className="px-4 pb-4 text-sm leading-relaxed text-[#37443c]">
