@@ -57,7 +57,7 @@ export async function POST(req: Request) {
    console.log("Image start:", image?.substring(0, 50));
 
     const completion = await openai.chat.completions.create({
-      model: "pt-4.1-mini",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
