@@ -76,8 +76,10 @@ export default function Home() {
   function handleLanguageToggle() {
     if (uiLanguage === "de") {
       setUiLanguage("en");
+      localStorage.setItem("uiLanguage", "en");
     } else {
       setUiLanguage("de");
+      localStorage.setItem("uiLanguage", "de");
     }
   }
   async function handleGenerate() {
@@ -124,16 +126,20 @@ export default function Home() {
           <a
             href="#"
             className="flex items-center gap-2.5"
-            aria-label="Savor homepage"
+            aria-label="Dishboost homepage"
           >
             <span className="flex size-9 items-center justify-center rounded-xl bg-[#234d3f] text-[#f6c96a]">
               <Icon name="sparkle" className="size-5" />
             </span>
             <span className="font-serif text-[21px] font-semibold tracking-[-0.04em] text-[#1e3029]">
               Dishboost
-            </span>
+            </span>           
           </a>
-          <button className="cursor-pointer" onClick={handleLanguageToggle}>
+          <div className="flex items-center gap-3">
+          <button
+            className="cursor-pointer rounded-full border border-[#e2e2dc] bg-white px-3 py-1.5 text-xs font-semibold tracking-wide text-[#516059] transition hover:bg-[#f7f7f3]"
+            onClick={handleLanguageToggle}
+          >
             {uiLanguage === "de" ? "EN" : "DE"}
           </button>
           {/* Account / profile button */}
@@ -143,6 +149,7 @@ export default function Home() {
           >
             <span className="text-sm font-semibold">JD</span>
           </button>
+          </div>
         </div>
       </header>
 
@@ -318,7 +325,7 @@ export default function Home() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#234d3f] text-sm font-semibold text-white shadow-[0_7px_15px_rgba(35,77,63,0.18)] transition hover:bg-[#1c4034] disabled:cursor-wait disabled:opacity-80"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#234d3f] text-sm font-semibold text-white shadow-[0_7px_15px_rgba(35,77,63,0.18)] transition hover:bg-[#1c4034] cursor-pointer disabled:cursor-wait disabled:opacity-80"
               >
                 <Icon name="sparkle" className="size-4 text-[#f9cd74]" />
 
