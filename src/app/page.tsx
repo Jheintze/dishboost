@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import Image from "next/image";
 import Icon from "./components/icons";
 import { InstagramPreview } from "./components/previews/InstagramPreview";
@@ -9,7 +9,6 @@ import { GooglePreview } from "./components/previews/GooglePreview";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { GeneratedContent } from "@/app/types/marketing";
-import { useEffect } from "react";
 import { translations } from "./lib/utils/translations";
 
 const platformStyles = {
@@ -44,14 +43,16 @@ export default function Home() {
   const [restaurant, setRestaurant] = useState("");
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState("German");
-  const [uiLanguage, setUiLanguage] = useState<"en" | "de">("de");
   const [details, setDetails] = useState("");
   const [remaining, setRemaining] = useState<number>(10);
   const [image, setImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
   const [generatedContent, setGeneratedContent] =
-    useState<GeneratedContent | null>(null);
+    useState<GeneratedContent | null>(null);  
+  const [uiLanguage, setUiLanguage] = useState<"en" | "de">("de");
+  
+
   const t = translations[uiLanguage];
 
   useEffect(() => {
@@ -75,13 +76,12 @@ export default function Home() {
   }
   function handleLanguageToggle() {
     if (uiLanguage === "de") {
-      setUiLanguage("en");
-      localStorage.setItem("uiLanguage", "en");
+      setUiLanguage("en");    
     } else {
-      setUiLanguage("de");
-      localStorage.setItem("uiLanguage", "de");
+      setUiLanguage("de");   
     }
   }
+
   async function handleGenerate() {
     setIsGenerating(true);
 
@@ -133,22 +133,22 @@ export default function Home() {
             </span>
             <span className="font-serif text-[21px] font-semibold tracking-[-0.04em] text-[#1e3029]">
               Dishboost
-            </span>           
+            </span>
           </a>
           <div className="flex items-center gap-3">
-          <button
-            className="cursor-pointer rounded-full border border-[#e2e2dc] bg-white px-3 py-1.5 text-xs font-semibold tracking-wide text-[#516059] transition hover:bg-[#f7f7f3]"
-            onClick={handleLanguageToggle}
-          >
-            {uiLanguage === "de" ? "EN" : "DE"}
-          </button>
-          {/* Account / profile button */}
-          <button
-            className="flex size-9 items-center justify-center rounded-full border border-[#e2e2dc] bg-white text-[#516059]"
-            aria-label="Open account menu"
-          >
-            <span className="text-sm font-semibold">JD</span>
-          </button>
+            <button
+              className="cursor-pointer rounded-full border border-[#e2e2dc] bg-white px-3 py-1.5 text-xs font-semibold tracking-wide text-[#516059] transition hover:bg-[#f7f7f3]"
+              onClick={handleLanguageToggle}
+            >
+              {uiLanguage === "de" ? "EN" : "DE"}
+            </button>
+            {/* Account / profile button */}
+            <button
+              className="flex size-9 items-center justify-center rounded-full border border-[#e2e2dc] bg-white text-[#516059]"
+              aria-label="Open account menu"
+            >
+              <span className="text-sm font-semibold">JD</span>
+            </button>
           </div>
         </div>
       </header>
