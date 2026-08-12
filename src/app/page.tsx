@@ -257,7 +257,10 @@ export default function Home() {
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm font-semibold text-[#304038]">
-                    {t.imageUpload} ( optional )
+                    {t.imageUpload}{" "}
+                    <span className="font-normal text-[#9ba39e]">
+                      (optional)
+                    </span>
                   </span>
 
                   <span className="text-xs text-[#8c9690]">
