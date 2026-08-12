@@ -49,9 +49,9 @@ export default function Home() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
   const [generatedContent, setGeneratedContent] =
-    useState<GeneratedContent | null>(null);  
+    useState<GeneratedContent | null>(null);
   const [uiLanguage, setUiLanguage] = useState<"en" | "de">("de");
-  
+
   const resultsRef = useRef<HTMLDivElement>(null);
   const t = translations[uiLanguage];
 
@@ -76,9 +76,9 @@ export default function Home() {
   }
   function handleLanguageToggle() {
     if (uiLanguage === "de") {
-      setUiLanguage("en");    
+      setUiLanguage("en");
     } else {
-      setUiLanguage("de");   
+      setUiLanguage("de");
     }
   }
 
@@ -97,8 +97,8 @@ export default function Home() {
       setError("Please add a food photo or promotion.");
       return;
     }
-    
-     setIsGenerating(true);
+
+    setIsGenerating(true);
 
     const res = await fetch("/api/generate", {
       method: "POST",
@@ -111,7 +111,7 @@ export default function Home() {
         language,
       }),
     });
-     
+
     const result = await res.json();
 
     if (!res.ok) {
@@ -125,10 +125,12 @@ export default function Home() {
     setGeneratedContent(result.generatedCaption);
 
     setTimeout(() => {
-      resultsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      if (window.innerWidth < 640) {
+        resultsRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }, 100);
 
     setIsGenerating(false);
@@ -401,6 +403,7 @@ export default function Home() {
                   return (
                     <article
                       key={key}
+                      ref={key === "instagram" ? resultsRef : undefined}
                       className="h-fit overflow-hidden rounded-2xl border border-[#e6e4df] bg-white"
                     >
                       {/* Platform header */}
@@ -454,10 +457,7 @@ export default function Home() {
 
                       {/* Social preview */}
                       <div className="border-t border-[#f0efeb] p-4">
-                        <div
-                          ref={key === "instagram" ? resultsRef : undefined}
-                          className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white"
-                        >
+                        <div className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white">
                           {key === "instagram" && (
                             <InstagramPreview
                               restaurant={restaurant}
