@@ -249,8 +249,8 @@ export default function Home() {
                   onChange={(e) => setLanguage(e.target.value)}
                   className="cursor-pointer bg-transparent font-semibold text-[#304038] outline-none"
                 >
-                  <option value="German">German</option>
-                  <option value="English">English</option>
+                  <option value="German">{t.contentLanguageGerman}</option>
+                  <option value="English">{t.contentLanguageEnglish}</option>
                 </select>
               </div>
               {/* ================= IMAGE UPLOAD ================= */}
@@ -359,9 +359,9 @@ export default function Home() {
               </div>
 
               {/* Platform filter button */}
-              <button className="flex items-center gap-1 text-sm font-semibold text-[#56655e] transition hover:text-[#2d493b]">
+              {/* <button className="flex items-center gap-1 text-sm font-semibold text-[#56655e] transition hover:text-[#2d493b]">
                 {t.allPlatforms} <Icon name="chevron" className="size-4" />
-              </button>
+              </button> */}
             </div>
 
             {/* ================= GENERATED PLATFORM CARDS ================= */}
