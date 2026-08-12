@@ -506,7 +506,7 @@ export default function Home() {
 
       {/* ================= FOOTER ================= */}
       <footer className="border-t border-[#e8e5dd] px-5 py-5 sm:px-8">
-        <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-1 text-xs text-[#89918c] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-1 text-center text-xs text-[#89918c] sm:flex-row sm:justify-between sm:text-left">
           <span>© {new Date().getFullYear()} Dishboost</span>
           <span>{t.footerTagline}</span>
         </div>
