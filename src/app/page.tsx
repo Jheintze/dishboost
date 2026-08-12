@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Icon from "./components/icons";
 import { InstagramPreview } from "./components/previews/InstagramPreview";
@@ -52,7 +52,7 @@ export default function Home() {
     useState<GeneratedContent | null>(null);  
   const [uiLanguage, setUiLanguage] = useState<"en" | "de">("de");
   
-
+  const resultsRef = useRef<HTMLDivElement>(null);
   const t = translations[uiLanguage];
 
   useEffect(() => {
@@ -123,6 +123,14 @@ export default function Home() {
     setRemaining(result.remaining);
     setError("");
     setGeneratedContent(result.generatedCaption);
+
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+
     setIsGenerating(false);
   }
 
@@ -446,7 +454,10 @@ export default function Home() {
 
                       {/* Social preview */}
                       <div className="border-t border-[#f0efeb] p-4">
-                        <div className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white">
+                        <div
+                          ref={key === "instagram" ? resultsRef : undefined}
+                          className="mx-auto max-w-md overflow-hidden rounded-xl border border-[#eceae5] bg-white"
+                        >
                           {key === "instagram" && (
                             <InstagramPreview
                               restaurant={restaurant}
