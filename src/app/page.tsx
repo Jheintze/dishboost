@@ -83,7 +83,22 @@ export default function Home() {
   }
 
   async function handleGenerate() {
-    setIsGenerating(true);
+    if (!restaurant.trim()) {
+      setError("Please enter your restaurant name.");
+      return;
+    }
+
+    if (!description.trim()) {
+      setError("Please enter a description for your restaurant.");
+      return;
+    }
+
+    if (!image && !details.trim()) {
+      setError("Please add a food photo or promotion.");
+      return;
+    }
+    
+     setIsGenerating(true);
 
     const res = await fetch("/api/generate", {
       method: "POST",
@@ -96,7 +111,7 @@ export default function Home() {
         language,
       }),
     });
-
+     
     const result = await res.json();
 
     if (!res.ok) {
@@ -106,7 +121,6 @@ export default function Home() {
     }
 
     setRemaining(result.remaining);
-
     setError("");
     setGeneratedContent(result.generatedCaption);
     setIsGenerating(false);
@@ -200,7 +214,7 @@ export default function Home() {
               {/* Restaurant name */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
-                  {t.restaurantName}
+                  {t.restaurantName}*
                 </span>
 
                 <input
@@ -214,7 +228,7 @@ export default function Home() {
               {/* Restaurant description */}
               <label className="block">
                 <span className="mb-2 block text-sm font-semibold text-[#304038]">
-                  {t.restaurantDescription}
+                  {t.restaurantDescription}*
                 </span>
 
                 <input
@@ -325,6 +339,9 @@ export default function Home() {
               </div>
 
               {/* Generate content button */}
+              {error && (
+                <p className="mb-3 text-center text-sm text-red-600">{error}</p>
+              )}
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
@@ -340,10 +357,6 @@ export default function Home() {
               <p className="mt-3 text-center text-xs text-[#8c9690]">
                 {remaining} {t.remainingGenerations}
               </p>
-
-              {error && (
-                <p className="mt-3 text-sm text-red-600 text-center">{error}</p>
-              )}
             </div>
           </section>
 
