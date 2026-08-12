@@ -3,7 +3,7 @@ export const translations = {
     marketingPrepTitle: "Marketing made easy",
     marketingPrepHeadline: "Turn your food photo into ready-to-post content.",
     marketingPrepDescription:
-      "Create tailored posts for Instagram, Facebook and Google from your restaurant details, promotions and a food photo — ready in just a few clicks.",
+      "Create tailored posts for Instagram, Facebook and Google Business from your restaurant details, promotions and a food photo — ready in just a few clicks.",
     newCreation: "New post",
     pageTitle: "What are we sharing?",
     restaurantName: "Restaurant name",
@@ -34,7 +34,7 @@ export const translations = {
     marketingPrepTitle: "Marketing leicht gemacht",
     marketingPrepHeadline: "Mach aus deinem Food-Foto fertige Beiträge.",
     marketingPrepDescription:
-      "Erstelle passende Posts für Instagram, Facebook und Google aus deinen Restaurantinfos, Aktionen und einem Food-Foto – mit nur wenigen Klicks.",
+      "Erstelle passende Posts für Instagram, Facebook und Google Business aus deinen Restaurantinfos, Aktionen und einem Food-Foto – mit nur wenigen Klicks.",
     newCreation: "Neuer Post",
     pageTitle: "Was möchten wir teilen?",
     restaurantName: "Restaurantname",
