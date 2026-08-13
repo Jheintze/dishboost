@@ -84,17 +84,17 @@ export default function Home() {
 
   async function handleGenerate() {
     if (!restaurant.trim()) {
-      setError("Please enter your restaurant name.");
+       setError(t.errorRestaurantRequired);
       return;
     }
 
     if (!description.trim()) {
-      setError("Please enter a description for your restaurant.");
+      setError(t.errorDescriptionRequired);
       return;
     }
 
     if (!image && !details.trim()) {
-      setError("Please add a food photo or promotion.");
+      setError(t.errorPhotoOrPromotionRequired);
       return;
     }
 
@@ -115,7 +115,7 @@ export default function Home() {
     const result = await res.json();
 
     if (!res.ok) {
-      setError(result.error || "Failed to generate content");
+      setError(result.error || t.errorGenerationFailed);
       setIsGenerating(false);
       return;
     }
@@ -444,12 +444,12 @@ export default function Home() {
                                 name="check"
                                 className="size-3.5 text-[#418060]"
                               />
-                              Copied
+                             {t.copied}
                             </>
                           ) : (
                             <>
                               <Icon name="copy" className="size-3.5" />
-                              Copy
+                             {t.copy}
                             </>
                           )}
                         </button>

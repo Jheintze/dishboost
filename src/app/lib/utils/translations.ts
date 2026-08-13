@@ -27,6 +27,12 @@ export const translations = {
     readyToShare: "Ready to share",
     contentKit: "Your content kit",
     allPlatforms: "All platforms",
+    errorRestaurantRequired: "Please enter your restaurant name.",
+    errorDescriptionRequired: "Please enter a description for your restaurant.",
+    errorPhotoOrPromotionRequired: "Please add a food photo or promotion.",
+    errorGenerationFailed: "Failed to generate content.",
+    copy: "Copy",
+    copied: "Copied",
     contentPlaceholderTitle: "Your content will appear here",
     contentPlaceholderDescription:
       "Add a few details about your dish, then we’ll create a tailored kit for every channel.",
@@ -61,7 +67,12 @@ export const translations = {
     readyToShare: "Bereit zum Teilen",
     contentKit: "Dein Content-Paket",
     allPlatforms: "Alle Plattformen",
-
+    errorRestaurantRequired: "Bitte gib den Namen deines Restaurants ein.",
+    errorDescriptionRequired: "Bitte gib eine Beschreibung deines Restaurants ein.",
+    errorPhotoOrPromotionRequired: "Bitte füge ein Foto oder eine Aktion hinzu.",
+    errorGenerationFailed: "Die Inhalte konnten nicht erstellt werden.",
+    copy: "Kopieren",
+    copied: "Kopiert",
     contentPlaceholderTitle: "Deine Inhalte werden hier angezeigt",
     contentPlaceholderDescription:
       "Füge ein paar Details zu deinem Gericht hinzu. Anschließend erstellen wir ein passendes Content-Paket für jeden Kanal.",
