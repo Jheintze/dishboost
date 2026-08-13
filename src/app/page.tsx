@@ -231,7 +231,7 @@ export default function Home() {
                   value={restaurant}
                   onChange={(e) => setRestaurant(e.target.value)}
                   className="h-11 w-full rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 text-[15px] outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]"
-                  placeholder="e.g. Luna Osteria"
+                  placeholder={t.restaurantNamePlaceholder}
                 />
               </label>
 
@@ -245,7 +245,7 @@ export default function Home() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   className="h-11 w-full rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 text-[15px] outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]"
-                  placeholder="Your cuisine, neighborhood, or vibe"
+                  placeholder={t.descriptionPlaceholder}
                 />
               </label>
 
@@ -261,7 +261,7 @@ export default function Home() {
                   onChange={(e) => setDetails(e.target.value)}
                   rows={3}
                   className="w-full resize-none rounded-xl border border-[#deded8] bg-[#fffefd] px-3.5 py-3 text-[15px] leading-6 outline-none transition placeholder:text-[#a4aaa5] focus:border-[#789484] focus:ring-4 focus:ring-[#edf3ef]"
-                  placeholder="e.g. Happy hour, new menu, live music Friday"
+                  placeholder={t.promotionDetailsPlaceholder}
                 />
               </label>
               {/* Content language */}
