@@ -50,7 +50,7 @@ export const translations = {
     restaurantDescription: "Kurzbeschreibung",
     promotionDetails: "Aktion oder Eventdetails",
     restaurantNamePlaceholder: "z. B. Luna Osteria",
-    descriptionPlaceholder: "Küche, Viertel oder deine Atmosphäre",
+    descriptionPlaceholder: "Küche,Viertel oder deine Atmosphäre",
     promotionDetailsPlaceholder: "z. B. Happy Hour, neue Speisekarte, Live-Musik am Freitag",
     imageUpload: "Food-Foto hinzufügen",
     replacePhoto: "Foto ersetzen",
