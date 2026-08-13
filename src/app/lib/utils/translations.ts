@@ -36,7 +36,7 @@ export const translations = {
     contentPlaceholderTitle: "Your content will appear here",
     contentPlaceholderDescription:
       "Add a few details about your dish, then we’ll create a tailored kit for every channel.",
-    footerTagline: "Focus on cooking, we'll handle the rest.",
+    footerTagline: "You focus on your restaurant, we handle the marketing.",
   },
 
   de: {
@@ -51,7 +51,8 @@ export const translations = {
     promotionDetails: "Aktion oder Eventdetails",
     restaurantNamePlaceholder: "z. B. Luna Osteria",
     descriptionPlaceholder: "Küche,Viertel oder deine Atmosphäre",
-    promotionDetailsPlaceholder: "z. B. Happy Hour, neue Speisekarte, Live-Musik am Freitag",
+    promotionDetailsPlaceholder:
+      "z. B. Happy Hour, neue Speisekarte, Live-Musik am Freitag",
     imageUpload: "Food-Foto hinzufügen",
     replacePhoto: "Foto ersetzen",
     removePhoto: "Foto entfernen",
@@ -68,14 +69,17 @@ export const translations = {
     contentKit: "Dein Content-Paket",
     allPlatforms: "Alle Plattformen",
     errorRestaurantRequired: "Bitte gib den Namen deines Restaurants ein.",
-    errorDescriptionRequired: "Bitte gib eine Beschreibung deines Restaurants ein.",
-    errorPhotoOrPromotionRequired: "Bitte füge ein Foto oder eine Aktion hinzu.",
+    errorDescriptionRequired:
+      "Bitte gib eine Beschreibung deines Restaurants ein.",
+    errorPhotoOrPromotionRequired:
+      "Bitte füge ein Foto oder eine Aktion hinzu.",
     errorGenerationFailed: "Die Inhalte konnten nicht erstellt werden.",
     copy: "Kopieren",
     copied: "Kopiert",
     contentPlaceholderTitle: "Deine Inhalte werden hier angezeigt",
     contentPlaceholderDescription:
       "Füge ein paar Details zu deinem Gericht hinzu. Anschließend erstellen wir ein passendes Content-Paket für jeden Kanal.",
-    footerTagline: "Konzentrier dich aufs Kochen, wir kümmern uns um den Rest.",
+    footerTagline:
+      "Konzentrier dich aufs Restaurant, wir kümmern uns ums Marketing.",
   },
 };
