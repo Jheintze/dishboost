@@ -167,12 +167,12 @@ export default function Home() {
               {uiLanguage === "de" ? "EN" : "DE"}
             </button>
             {/* Account / profile button */}
-            <button
+            {/* <button
               className="flex size-9 items-center justify-center rounded-full border border-[#e2e2dc] bg-white text-[#516059]"
               aria-label="Open account menu"
             >
               <span className="text-sm font-semibold">JD</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </header>
