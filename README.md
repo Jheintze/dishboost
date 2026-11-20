@@ -6,6 +6,7 @@ The application transforms restaurant information, promotions and food photos in
 
 **Project status:** Early-stage prototype – currently in development and validation.
 
+
 <img width="1248" height="920" alt="dishboost2" src="https://github.com/user-attachments/assets/1a9f2a05-e4ca-4fd2-8778-838f1e2c52f5" />
 
 ## Features
